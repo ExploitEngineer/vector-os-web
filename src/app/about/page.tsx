@@ -12,9 +12,10 @@ export default function AboutPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Who we are"
-        title="ABOUT US"
-        sub="A collective of engineers building open source low-level tools."
+        eyebrow="About Us"
+        lead="THE"
+        accent="COLLECTIVE."
+        sub="A crew of engineers building open source tools that actually matter."
       />
       <AboutSection />
     </>
