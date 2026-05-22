@@ -1,0 +1,283 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────
+   Vector OS design tokens
+   Single source of truth for colors, fonts and motion.
+   Reference in components via Tailwind utilities, e.g.
+   `bg-vos-black text-vos-cyan font-mono animate-fade-up`.
+   The font vars resolve to next/font families set on <html>.
+   ───────────────────────────────────────────────────────────── */
+@theme {
+  /* Surfaces */
+  --color-vos-black: #000000;
+  --color-vos-surface: #080808;
+  --color-vos-panel: #0a0a0a;
+  --color-vos-line: #1a1a1a;
+
+  /* Accents */
+  --color-vos-cyan: #00e5ff;
+  --color-vos-green: #22ff6e;
+  --color-vos-red: #ff2d55;
+  --color-vos-amber: #ffbd2e;
+  --color-vos-muted: #555555;
+
+  /* macOS traffic-light dots (terminal chrome) */
+  --color-vos-dot-red: #ff5f57;
+  --color-vos-dot-amber: #ffbd2e;
+  --color-vos-dot-green: #28ca41;
+
+  /* Type — map to next/font css variables (see layout.tsx) */
+  --font-display: var(--font-anton), sans-serif;
+  --font-heading: var(--font-bebas), sans-serif;
+  --font-oswald: var(--font-oswald), sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+
+  /* Motion */
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  --animate-card-in: card-in 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+  --animate-blink: blink 1s step-end infinite;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Continuous marquee used by the ticker / slider strip. */
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Vertical marquee for project-card terminal bootlogs (on hover). */
+@keyframes scroll-logs {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+/* Dropdown menu entrance. */
+@keyframes dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Soft opacity pulse — "live" status dots. */
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* Expanding ring — "online" indicator. */
+@keyframes ping-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(3.5);
+    opacity: 0;
+  }
+}
+
+/* Light sweep across the footer wordmark on hover. */
+@keyframes sweep {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(500%);
+  }
+}
+
+/* Blinking terminal cursor. */
+@keyframes blink-cursor {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Hero — vertical scanline sweep. */
+@keyframes hero-scan {
+  0% {
+    top: -4px;
+    opacity: 0.5;
+  }
+  80% {
+    opacity: 0.15;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+/* Hero — RGB glitch split on the headline. */
+@keyframes red-glitch {
+  0% {
+    clip-path: inset(6% 0 66% 0);
+    transform: translate(-5px, 1px);
+  }
+  20% {
+    clip-path: inset(52% 0 14% 0);
+    transform: translate(4px, -2px);
+  }
+  40% {
+    clip-path: inset(24% 0 42% 0);
+    transform: translate(-3px, 2px);
+  }
+  60% {
+    clip-path: inset(70% 0 5% 0);
+    transform: translate(6px, -1px);
+  }
+  80% {
+    clip-path: inset(14% 0 54% 0);
+    transform: translate(-4px, 1px);
+  }
+  100% {
+    clip-path: inset(0 0 100% 0);
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes cyan-glitch {
+  0% {
+    clip-path: inset(66% 0 6% 0);
+    transform: translate(5px, -1px);
+  }
+  20% {
+    clip-path: inset(14% 0 52% 0);
+    transform: translate(-4px, 2px);
+  }
+  40% {
+    clip-path: inset(42% 0 24% 0);
+    transform: translate(3px, -2px);
+  }
+  60% {
+    clip-path: inset(5% 0 70% 0);
+    transform: translate(-6px, 1px);
+  }
+  80% {
+    clip-path: inset(54% 0 14% 0);
+    transform: translate(4px, -1px);
+  }
+  100% {
+    clip-path: inset(0 0 100% 0);
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes title-shake {
+  0% {
+    transform: translate(-2px, 0);
+  }
+  25% {
+    transform: translate(2px, 1px);
+  }
+  50% {
+    transform: translate(-1px, -1px);
+  }
+  75% {
+    transform: translate(1px, 1px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@layer base {
+  html {
+    height: 100%;
+  }
+
+  body {
+    min-height: 100%;
+    background: var(--color-vos-black);
+    color: #ffffff;
+    font-family: var(--font-mono);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer utilities {
+  /* Edge fade for marquees: transparent → opaque → transparent. */
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      #000 5%,
+      #000 95%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      #000 5%,
+      #000 95%,
+      transparent 100%
+    );
+  }
+
+  /* CRT scanline overlay. */
+  .scanlines {
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.06) 2px,
+      rgba(0, 0, 0, 0.06) 4px
+    );
+  }
+}
