@@ -5,7 +5,11 @@ import { GITHUB_URL } from "@/data/navigation";
 import { useCountUp } from "@/hooks/useCountUp";
 import { useInView } from "@/hooks/useInView";
 import { useScrambleText } from "@/hooks/useScramble";
+import type { GithubOrgStats } from "@/lib/services/github";
 import { COLORS } from "@/lib/theme";
+
+/** Shown when the GitHub API is unreachable so we never render zeros. */
+const FALLBACK_STATS: GithubOrgStats = { repos: 8, members: 7, stars: 38 };
 
 const statValue =
   "block px-7 font-display text-[72px] leading-none text-white transition-[color,text-shadow] duration-300 group-hover/stat:text-vos-cyan group-hover/stat:[text-shadow:0_0_30px_rgba(0,229,255,0.3)] max-[900px]:px-5 max-[900px]:text-[52px] max-[480px]:px-4 max-[480px]:text-[40px]";
@@ -65,18 +69,27 @@ function StatScramble({
   );
 }
 
-const TERM_ROWS = [
-  { key: "repos", val: "08", color: COLORS.white },
-  { key: "members", val: "07", color: COLORS.white },
-  { key: "stars", val: "38+", color: COLORS.white },
-  { key: "domain", val: "VERIFIED", color: COLORS.cyan },
-  { key: "status", val: "[ACTIVE]", color: COLORS.green },
-];
-
-export default function AboutSection() {
+export default function AboutSection({ stats }: { stats?: GithubOrgStats }) {
   const { ref, inView } = useInView<HTMLElement>(0.1);
   const { ref: statsRef, inView: statsStarted } =
     useInView<HTMLDivElement>(0.3);
+
+  const s = stats ?? FALLBACK_STATS;
+  const termRows = [
+    {
+      key: "repos",
+      val: String(s.repos).padStart(2, "0"),
+      color: COLORS.white,
+    },
+    {
+      key: "members",
+      val: String(s.members).padStart(2, "0"),
+      color: COLORS.white,
+    },
+    { key: "stars", val: String(s.stars), color: COLORS.white },
+    { key: "domain", val: "VERIFIED", color: COLORS.cyan },
+    { key: "status", val: "[ACTIVE]", color: COLORS.green },
+  ];
 
   return (
     <section
@@ -138,7 +151,7 @@ export default function AboutSection() {
               </span>
             </div>
             <div className="px-6 pb-5 pt-6 max-[480px]:px-4 max-[480px]:pb-3.5 max-[480px]:pt-4">
-              {TERM_ROWS.map((r) => (
+              {termRows.map((r) => (
                 <div
                   key={r.key}
                   className="flex items-center border-b border-white/[0.03] py-[5px] last-of-type:border-none"
@@ -176,20 +189,19 @@ export default function AboutSection() {
           className={`grid grid-cols-4 border-t border-white/[0.06] opacity-0 max-[900px]:grid-cols-2 ${inView ? "animate-[fade-up_0.7s_cubic-bezier(0.22,1,0.36,1)_0.4s_forwards]" : ""}`}
         >
           <StatCounter
-            target={8}
+            target={s.repos}
             label="Repositories"
             started={statsStarted}
             delay={0}
           />
           <StatCounter
-            target={7}
+            target={s.members}
             label="Members"
             started={statsStarted}
             delay={150}
           />
           <StatCounter
-            target={38}
-            suffix="+"
+            target={s.stars}
             label="Stars"
             started={statsStarted}
             delay={300}

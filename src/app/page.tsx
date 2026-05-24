@@ -7,11 +7,13 @@ import TickerStrip from "@/components/sections/home/TickerStrip";
 import ProjectGrid from "@/components/sections/projects/ProjectGrid";
 import { getAllProjects } from "@/lib/queries/projects";
 import { getAllTeam } from "@/lib/queries/team";
+import { getOrgStats } from "@/lib/services/github";
 
 export default async function HomePage() {
-  const [projects, members] = await Promise.all([
+  const [projects, members, stats] = await Promise.all([
     getAllProjects(),
     getAllTeam(),
+    getOrgStats(),
   ]);
 
   return (
@@ -19,7 +21,7 @@ export default async function HomePage() {
       <Hero />
       <Mission />
       <TickerStrip />
-      <AboutSection />
+      <AboutSection stats={stats ?? undefined} />
       {/* "Our work" — grid only, no filters/load-more */}
       <ProjectGrid
         projects={projects}
