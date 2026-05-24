@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     template: "%s · Vector OS",
   },
    icons: {
-    icon: "/Vector OS new Logo.ico",
+    icon: "/favicon.ico",
     shortcut: "/Vector OS new Logo.ico",
   },
   description:
