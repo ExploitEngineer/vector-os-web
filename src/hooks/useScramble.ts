@@ -3,12 +3,14 @@
 import { useEffect, useState } from "react";
 import { SCRAMBLE_CHARS } from "@/lib/constants";
 
-function randomScramble(target: string, chars: string) {
+// Deterministic placeholder for the initial (SSR) render. Using Math.random in
+// a useState initializer makes the server and client disagree, which trips a
+// hydration mismatch. Index-based picks look scrambled but are identical on
+// both sides; the real randomized scramble runs later in useEffect (client only).
+function seedScramble(target: string, chars: string) {
   return target
     .split("")
-    .map((c) =>
-      c === "\n" ? "\n" : chars[Math.floor(Math.random() * chars.length)],
-    )
+    .map((c, i) => (c === "\n" ? "\n" : chars[(i * 7) % chars.length]))
     .join("");
 }
 
@@ -22,7 +24,7 @@ export function useScramble(
   intervalMs = 14,
   chars = SCRAMBLE_CHARS,
 ) {
-  const [display, setDisplay] = useState(() => randomScramble(target, chars));
+  const [display, setDisplay] = useState(() => seedScramble(target, chars));
   const [done, setDone] = useState(false);
 
   useEffect(() => {
@@ -78,7 +80,7 @@ export function useScrambleText(
     chars = SCRAMBLE_CHARS,
   }: ScrambleTextOptions = {},
 ) {
-  const [val, setVal] = useState(() => randomScramble(target, chars));
+  const [val, setVal] = useState(() => seedScramble(target, chars));
 
   useEffect(() => {
     if (!started) return;
