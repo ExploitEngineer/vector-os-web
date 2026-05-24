@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import Dropdown from "@/components/ui/Dropdown";
-import { PROJECTS } from "@/data/projects";
 import { useInView } from "@/hooks/useInView";
 import { LANG_COLORS } from "@/lib/theme";
+import type { Project } from "@/types";
 import ProjectCard from "./ProjectCard";
 
 const TYPE_OPTIONS = [
@@ -25,11 +25,13 @@ const langOptions = (langs: string[]) => [
 ];
 
 export default function ProjectGrid({
+  projects,
   columns = 3,
   showFilters = true,
   pageSize = 6,
   showLoadMore = true,
 }: {
+  projects: Project[];
   columns?: number;
   showFilters?: boolean;
   pageSize?: number;
@@ -75,9 +77,9 @@ export default function ProjectGrid({
     setShowAll(false);
   }, [search, typeFilter, langFilter, sortBy]);
 
-  const allLangs = Array.from(new Set(PROJECTS.map((p) => p.lang)));
+  const allLangs = Array.from(new Set(projects.map((p) => p.lang)));
 
-  const filtered = PROJECTS.filter((p) => {
+  const filtered = projects.filter((p) => {
     const q = search.trim().toLowerCase();
     const searchMatch =
       !q ||
@@ -108,7 +110,7 @@ export default function ProjectGrid({
 
   const reveal = (delay: string) =>
     visible
-      ? `animate-[fade-up_0.7s_cubic-bezier(0.4,0,0.2,1)_${delay}_forwards]`
+      ? `animate-[fade-up_0.7s_cubic-bezier(0.22,1,0.36,1)_${delay}_forwards]`
       : "";
 
   return (
@@ -191,7 +193,7 @@ export default function ProjectGrid({
               <span className="font-mono text-[10px] tracking-[0.14em] text-white/20">
                 {sorted.length === 0
                   ? "// No results"
-                  : `// ${sorted.length} of ${PROJECTS.length} projects`}
+                  : `// ${sorted.length} of ${projects.length} projects`}
               </span>
               <div className="flex flex-wrap items-center gap-1.5 max-[480px]:hidden">
                 {typeFilter !== "ALL" && (
@@ -259,7 +261,7 @@ export default function ProjectGrid({
               onClick={() => setShowAll(true)}
               className="group relative inline-flex h-12 items-center gap-2.5 overflow-hidden rounded-[3px] border border-white/[0.12] px-9 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-white/60 transition-[color,border-color,transform] duration-[250ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:-translate-y-0.5 hover:border-vos-cyan hover:text-black max-[900px]:px-7 max-[900px]:text-[10px] max-[480px]:h-[46px] max-[480px]:w-full max-[480px]:justify-center max-[480px]:px-5"
             >
-              <span className="absolute inset-0 -translate-x-[101%] bg-vos-cyan transition-transform duration-[280ms] ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:translate-x-0" />
+              <span className="absolute inset-0 -translate-x-[101%] bg-vos-cyan transition-transform duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0" />
               <span className="relative z-[1]">LOAD MORE PROJECTS ↓</span>
             </button>
           </div>

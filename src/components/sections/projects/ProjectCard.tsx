@@ -1,7 +1,7 @@
 "use client";
 
-import type { Project } from "@/data/projects";
 import { LANG_COLORS, STATUS_CFG } from "@/lib/theme";
+import type { Project } from "@/types";
 
 export default function ProjectCard({
   project: p,
@@ -24,7 +24,7 @@ export default function ProjectCard({
       rel="noopener noreferrer"
       className={`group relative z-[1] flex flex-col overflow-hidden rounded-md border border-white/[0.07] bg-vos-surface no-underline opacity-0 transition-[border-color,transform,box-shadow] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:z-[2] hover:-translate-y-1 hover:border-vos-cyan/30 hover:shadow-[0_16px_48px_rgba(0,0,0,0.6),0_0_0_1px_rgba(0,229,255,0.1),0_0_40px_rgba(0,229,255,0.05)] ${
         visible
-          ? "animate-[fade-up_0.6s_cubic-bezier(0.4,0,0.2,1)_forwards]"
+          ? "animate-[fade-up_0.6s_cubic-bezier(0.22,1,0.36,1)_forwards]"
           : ""
       }`}
       style={{ animationDelay: `${index * 0.07}s` }}
