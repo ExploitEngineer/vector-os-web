@@ -44,6 +44,10 @@ export const metadata: Metadata = {
     default: "Vector OS — Open source. Built different. Zero limits.",
     template: "%s · Vector OS",
   },
+   icons: {
+    icon: "/favicon.ico",
+    shortcut: "/Vector OS new Logo.ico",
+  },
   description:
     "A collective of engineers building open source security tools and low-level software at the boundary of possibility.",
   metadataBase: new URL("https://vectoros.dpdns.org"),
