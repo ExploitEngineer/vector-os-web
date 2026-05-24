@@ -7,6 +7,7 @@ import {
   Oswald,
 } from "next/font/google";
 import Footer from "@/components/layout/Footer";
+import HideOnAdmin from "@/components/layout/HideOnAdmin";
 import Navbar from "@/components/layout/Navbar";
 import SiteLoader from "@/components/layout/SiteLoader";
 import "./globals.css";
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
     default: "Vector OS — Open source. Built different. Zero limits.",
     template: "%s · Vector OS",
   },
-   icons: {
+  icons: {
     icon: "/favicon.ico",
     shortcut: "/Vector OS new Logo.ico",
   },
@@ -67,10 +68,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={fontVariables}>
       <body className="flex min-h-full flex-col bg-vos-black">
-        <SiteLoader />
-        <Navbar />
+        <HideOnAdmin>
+          <SiteLoader />
+          <Navbar />
+        </HideOnAdmin>
         <main className="flex-1">{children}</main>
-        <Footer />
+        <HideOnAdmin>
+          <Footer />
+        </HideOnAdmin>
       </body>
     </html>
   );

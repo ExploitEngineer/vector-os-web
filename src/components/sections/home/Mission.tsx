@@ -41,7 +41,7 @@ export default function Mission() {
         <p
           className={`mb-14 flex items-center gap-4 font-mono text-[13px] uppercase tracking-[0.3em] text-white/35 opacity-0 after:h-px after:flex-1 after:bg-white/[0.07] after:content-[''] max-[900px]:mb-10 max-[900px]:text-[11px] max-[480px]:mb-6 max-[480px]:tracking-[0.18em] max-[480px]:text-[10px] ${
             inView
-              ? "animate-[fade-up_0.7s_cubic-bezier(0.4,0,0.2,1)_0.1s_forwards]"
+              ? "animate-[fade-up_0.7s_cubic-bezier(0.22,1,0.36,1)_0.1s_forwards]"
               : ""
           }`}
         >
@@ -60,7 +60,7 @@ export default function Mission() {
               ref={(el) => {
                 itemRefs.current[i] = el;
               }}
-              className="grid cursor-pointer grid-cols-[64px_1fr_72px] items-center gap-6 border-t border-white/[0.06] py-5 opacity-0 animate-[fade-up_0.6s_cubic-bezier(0.4,0,0.2,1)_forwards] last-of-type:border-b last-of-type:border-white/[0.06] max-[900px]:grid-cols-[40px_1fr_48px] max-[900px]:gap-4 max-[900px]:py-4 max-[480px]:grid-cols-[28px_1fr_32px] max-[480px]:gap-2 max-[480px]:py-2.5"
+              className="grid cursor-pointer grid-cols-[64px_1fr_72px] items-center gap-6 border-t border-white/[0.06] py-5 opacity-0 animate-[fade-up_0.6s_cubic-bezier(0.22,1,0.36,1)_forwards] last-of-type:border-b last-of-type:border-white/[0.06] max-[900px]:grid-cols-[40px_1fr_48px] max-[900px]:gap-4 max-[900px]:py-4 max-[480px]:grid-cols-[28px_1fr_32px] max-[480px]:gap-2 max-[480px]:py-2.5"
               style={{
                 opacity: isPast ? 0.1 : isActive ? 1 : 0.3,
                 transform: `scale(${isActive ? 1 : 0.98})`,

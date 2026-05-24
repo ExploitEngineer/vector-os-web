@@ -85,14 +85,14 @@ export default function AboutSection() {
     >
       <div className="mx-auto w-full max-w-[1200px]">
         <p
-          className={`mb-16 flex items-center gap-4 font-mono text-[13px] uppercase tracking-[0.3em] text-white/35 opacity-0 after:h-px after:flex-1 after:bg-white/[0.07] after:content-[''] max-[900px]:mb-10 max-[900px]:text-[11px] max-[480px]:mb-7 max-[480px]:text-[10px] max-[480px]:tracking-[0.2em] ${inView ? "animate-[fade-up_0.7s_cubic-bezier(0.4,0,0.2,1)_0.1s_forwards]" : ""}`}
+          className={`mb-16 flex items-center gap-4 font-mono text-[13px] uppercase tracking-[0.3em] text-white/35 opacity-0 after:h-px after:flex-1 after:bg-white/[0.07] after:content-[''] max-[900px]:mb-10 max-[900px]:text-[11px] max-[480px]:mb-7 max-[480px]:text-[10px] max-[480px]:tracking-[0.2em] ${inView ? "animate-[fade-up_0.7s_cubic-bezier(0.22,1,0.36,1)_0.1s_forwards]" : ""}`}
         >
           <span className="tracking-normal text-vos-cyan/50">{"//"}</span>About
           Us
         </p>
 
         <div
-          className={`mb-20 grid grid-cols-[1fr_360px] items-start gap-20 opacity-0 max-[900px]:mb-12 max-[900px]:grid-cols-1 max-[900px]:gap-10 max-[480px]:mb-9 max-[480px]:gap-7 ${inView ? "animate-[fade-up_0.7s_cubic-bezier(0.4,0,0.2,1)_0.25s_forwards]" : ""}`}
+          className={`mb-20 grid grid-cols-[1fr_360px] items-start gap-20 opacity-0 max-[900px]:mb-12 max-[900px]:grid-cols-1 max-[900px]:gap-10 max-[480px]:mb-9 max-[480px]:gap-7 ${inView ? "animate-[fade-up_0.7s_cubic-bezier(0.22,1,0.36,1)_0.25s_forwards]" : ""}`}
         >
           <div>
             <h2 className="mb-8 font-display text-[96px] uppercase leading-[0.9] tracking-[0.01em] text-white max-[900px]:mb-6 max-[900px]:text-[64px] max-[480px]:mb-5 max-[480px]:text-center max-[480px]:text-[44px]">
@@ -113,7 +113,7 @@ export default function AboutSection() {
                 href="/projects"
                 className="group/btn relative inline-flex h-12 items-center gap-2.5 overflow-hidden rounded-sm border border-white bg-white px-7 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-black transition-[transform,border-color] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:-translate-y-0.5 hover:border-vos-cyan max-[480px]:h-11 max-[480px]:w-full max-[480px]:justify-center max-[480px]:px-5 max-[480px]:text-[10px]"
               >
-                <span className="absolute inset-0 -translate-x-[101%] bg-vos-cyan transition-transform duration-[280ms] ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/btn:translate-x-0" />
+                <span className="absolute inset-0 -translate-x-[101%] bg-vos-cyan transition-transform duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/btn:translate-x-0" />
                 <span className="relative z-[1]">BROWSE PROJECTS →</span>
               </Link>
               <a
@@ -173,7 +173,7 @@ export default function AboutSection() {
         {/* stats */}
         <div
           ref={statsRef}
-          className={`grid grid-cols-4 border-t border-white/[0.06] opacity-0 max-[900px]:grid-cols-2 ${inView ? "animate-[fade-up_0.7s_cubic-bezier(0.4,0,0.2,1)_0.4s_forwards]" : ""}`}
+          className={`grid grid-cols-4 border-t border-white/[0.06] opacity-0 max-[900px]:grid-cols-2 ${inView ? "animate-[fade-up_0.7s_cubic-bezier(0.22,1,0.36,1)_0.4s_forwards]" : ""}`}
         >
           <StatCounter
             target={8}

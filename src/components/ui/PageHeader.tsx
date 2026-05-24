@@ -66,7 +66,7 @@ export default function PageHeader({
 
       <div className="relative z-[2] mx-auto flex w-full max-w-[1200px] flex-col items-center">
         <p
-          className={`mb-6 flex items-center justify-center gap-4 font-mono text-[13px] uppercase tracking-[0.3em] text-white/35 opacity-0 before:h-px before:w-10 before:bg-white/10 before:content-[''] after:h-px after:w-10 after:bg-white/10 after:content-[''] max-[900px]:text-[11px] max-[900px]:before:w-6 max-[900px]:after:w-6 max-[480px]:mb-4 max-[480px]:gap-2.5 max-[480px]:text-[10px] max-[480px]:tracking-[0.2em] max-[480px]:before:w-4 max-[480px]:after:w-4 ${inView ? "animate-[fade-up_0.7s_cubic-bezier(0.4,0,0.2,1)_0.1s_forwards]" : ""}`}
+          className={`mb-6 flex items-center justify-center gap-4 font-mono text-[13px] uppercase tracking-[0.3em] text-white/35 opacity-0 before:h-px before:w-10 before:bg-white/10 before:content-[''] after:h-px after:w-10 after:bg-white/10 after:content-[''] max-[900px]:text-[11px] max-[900px]:before:w-6 max-[900px]:after:w-6 max-[480px]:mb-4 max-[480px]:gap-2.5 max-[480px]:text-[10px] max-[480px]:tracking-[0.2em] max-[480px]:before:w-4 max-[480px]:after:w-4 ${inView ? "animate-[fade-up_0.7s_cubic-bezier(0.22,1,0.36,1)_0.1s_forwards]" : ""}`}
         >
           <span className="tracking-normal text-vos-cyan/50">{"//"}</span>
           {eyebrow}
@@ -86,14 +86,14 @@ export default function PageHeader({
         </h1>
 
         <p
-          className={`font-mono text-[12px] uppercase tracking-[0.2em] text-white/30 opacity-0 max-[900px]:text-[11px] max-[900px]:tracking-[0.16em] max-[480px]:text-[10px] max-[480px]:tracking-[0.14em] ${inView ? "animate-[fade-up_0.7s_cubic-bezier(0.4,0,0.2,1)_0.3s_forwards]" : ""}`}
+          className={`font-mono text-[12px] uppercase tracking-[0.2em] text-white/30 opacity-0 max-[900px]:text-[11px] max-[900px]:tracking-[0.16em] max-[480px]:text-[10px] max-[480px]:tracking-[0.14em] ${inView ? "animate-[fade-up_0.7s_cubic-bezier(0.22,1,0.36,1)_0.3s_forwards]" : ""}`}
         >
           {sub}
         </p>
 
         {stats && stats.length > 0 && (
           <div
-            className={`mt-12 flex items-stretch justify-center gap-6 opacity-0 max-[900px]:mt-10 max-[900px]:gap-4 max-[480px]:mt-8 max-[480px]:gap-3 ${inView ? "animate-[fade-up_0.7s_cubic-bezier(0.4,0,0.2,1)_0.45s_forwards]" : ""}`}
+            className={`mt-12 flex items-stretch justify-center gap-6 opacity-0 max-[900px]:mt-10 max-[900px]:gap-4 max-[480px]:mt-8 max-[480px]:gap-3 ${inView ? "animate-[fade-up_0.7s_cubic-bezier(0.22,1,0.36,1)_0.45s_forwards]" : ""}`}
           >
             {stats.map((s, i) => (
               <Fragment key={s.label}>

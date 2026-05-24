@@ -5,8 +5,15 @@ import Mission from "@/components/sections/home/Mission";
 import TeamSection from "@/components/sections/home/TeamSection";
 import TickerStrip from "@/components/sections/home/TickerStrip";
 import ProjectGrid from "@/components/sections/projects/ProjectGrid";
+import { getAllProjects } from "@/lib/queries/projects";
+import { getAllTeam } from "@/lib/queries/team";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [projects, members] = await Promise.all([
+    getAllProjects(),
+    getAllTeam(),
+  ]);
+
   return (
     <>
       <Hero />
@@ -14,8 +21,13 @@ export default function HomePage() {
       <TickerStrip />
       <AboutSection />
       {/* "Our work" — grid only, no filters/load-more */}
-      <ProjectGrid columns={2} showFilters={false} showLoadMore={false} />
-      <TeamSection />
+      <ProjectGrid
+        projects={projects}
+        columns={2}
+        showFilters={false}
+        showLoadMore={false}
+      />
+      <TeamSection members={members} />
       <GetInvolved />
     </>
   );
