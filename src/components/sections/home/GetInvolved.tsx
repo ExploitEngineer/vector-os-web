@@ -15,7 +15,7 @@ const LINES = [
   { type: "comment", text: "# build something that matters." },
 ] as const;
 
-const reveal = "animate-[fade-up_0.7s_cubic-bezier(0.4,0,0.2,1)_forwards]";
+const reveal = "animate-[fade-up_0.7s_cubic-bezier(0.22,1,0.36,1)_forwards]";
 
 export default function GetInvolved() {
   const { ref, inView } = useInView<HTMLElement>(0.1);
