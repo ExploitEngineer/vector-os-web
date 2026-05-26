@@ -35,7 +35,7 @@ export default async function AccountPage() {
                 <Mail className="size-4" />
               </span>
               <span className="truncate font-mono text-[13px] text-foreground">
-                {user?.name || user?.email}
+                {user?.email || user?.name}
               </span>
             </div>
             <div className="flex items-center justify-between border-t border-border pt-4">
