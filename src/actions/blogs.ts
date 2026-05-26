@@ -90,7 +90,7 @@ export async function updateBlog(
   // Preserve the original publish date; only stamp it the first time a post
   // goes live.
   const [existing] = await db
-    .select({ publishedAt: blogs.publishedAt })
+    .select({ publishedAt: blogs.publishedAt, slug: blogs.slug })
     .from(blogs)
     .where(eq(blogs.id, id))
     .limit(1);
@@ -114,6 +114,9 @@ export async function updateBlog(
   }
 
   revalidateBlogs(slug);
+  if (existing?.slug && existing.slug !== slug) {
+    revalidatePath(`/blogs/${existing.slug}`);
+  }
   redirect("/admin/blogs");
 }
 
@@ -121,7 +124,12 @@ export async function deleteBlog(formData: FormData): Promise<void> {
   await requireAdmin();
   const id = str(formData, "id");
   if (id) {
+    const [existing] = await db
+      .select({ slug: blogs.slug })
+      .from(blogs)
+      .where(eq(blogs.id, id))
+      .limit(1);
     await db.delete(blogs).where(eq(blogs.id, id));
-    revalidateBlogs();
+    revalidateBlogs(existing?.slug);
   }
 }
