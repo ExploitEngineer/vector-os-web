@@ -22,10 +22,10 @@ export default function Footer() {
       {/* Wordmark + tagline */}
       <div className="border-b border-white/[0.08]">
         <div className="group relative mx-auto max-w-[1200px] cursor-default overflow-hidden px-12 pt-16 max-[900px]:px-8 max-[900px]:pt-12 max-[480px]:px-5 max-[480px]:pt-10">
-          <span className="block select-none text-center font-display text-[200px] uppercase leading-[0.85] tracking-[0.01em] text-[#1f1f1f] transition-[letter-spacing] duration-[550ms] group-hover:tracking-[0.06em] max-[900px]:text-[120px] max-[480px]:text-[56px] max-[480px]:tracking-[0.02em]">
+          <span className="block select-none text-center font-display text-[200px] uppercase leading-[0.85] tracking-[0.01em] text-white/[0.12] transition-[letter-spacing,color,text-shadow] duration-[550ms] group-hover:tracking-[0.06em] group-hover:text-white/[0.17] group-hover:[text-shadow:0_0_60px_rgb(var(--glow-cyan)/0.08)] max-[900px]:text-[120px] max-[480px]:text-[56px] max-[480px]:tracking-[0.02em]">
             VECTOR OS
           </span>
-          <span className="pointer-events-none absolute left-0 top-0 h-full w-[15%] -translate-x-full bg-gradient-to-r from-transparent via-white/[0.04] to-transparent group-hover:animate-[sweep_1s_ease_forwards]" />
+          <span className="pointer-events-none absolute left-0 top-0 h-full w-[15%] -translate-x-full bg-gradient-to-r from-transparent via-white/[0.06] to-transparent group-hover:animate-[sweep_1s_ease_forwards]" />
         </div>
         <div className="mx-auto flex max-w-[1200px] flex-wrap items-center justify-between gap-6 px-12 pb-11 pt-[18px] max-[900px]:px-8 max-[480px]:flex-col max-[480px]:items-start max-[480px]:gap-[10px] max-[480px]:px-5">
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/35 max-[480px]:text-[9px]">
@@ -34,7 +34,7 @@ export default function Footer() {
             Zero limits.
           </p>
           <div className="inline-flex shrink-0 items-center gap-2 rounded-[20px] border border-vos-green/20 bg-vos-green/5 px-[14px] py-1.5 font-mono text-[9px] uppercase tracking-[0.14em] text-vos-green max-[480px]:text-[8px]">
-            <span className="h-[5px] w-[5px] shrink-0 rounded-full bg-vos-green shadow-[0_0_6px_rgba(34,255,110,0.9)] animate-[pulse-soft_2s_ease-in-out_infinite]" />
+            <span className="h-[5px] w-[5px] shrink-0 rounded-full bg-vos-green shadow-[0_0_6px_rgb(var(--glow-green)/0.9)] animate-[pulse-soft_2s_ease-in-out_infinite]" />
             All systems operational
           </div>
         </div>

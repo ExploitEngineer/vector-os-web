@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 /**
  * Eases a number from 0 → `target` over `duration` ms once `started`, after an
- * optional `delay`. Used by the About stat counters.
+ * optional `delay`. Used by the About stat counters. Under reduced-motion it
+ * jumps straight to `target` (no rAF loop).
  */
 export function useCountUp(
   target: number,
@@ -13,9 +15,14 @@ export function useCountUp(
   delay = 0,
 ) {
   const [val, setVal] = useState(0);
+  const reduced = useReducedMotion();
 
   useEffect(() => {
     if (!started) return;
+    if (reduced) {
+      setVal(target);
+      return;
+    }
     const t = setTimeout(() => {
       const start = performance.now();
       const tick = (now: number) => {
@@ -28,7 +35,7 @@ export function useCountUp(
       requestAnimationFrame(tick);
     }, delay);
     return () => clearTimeout(t);
-  }, [started, target, duration, delay]);
+  }, [started, target, duration, delay, reduced]);
 
   return val;
 }

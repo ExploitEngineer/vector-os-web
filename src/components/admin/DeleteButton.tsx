@@ -26,7 +26,7 @@ export default function DeleteButton({
       <button
         type="submit"
         disabled={pending}
-        className="rounded-md border border-vos-red/30 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-vos-red/80 transition-colors hover:border-vos-red hover:bg-vos-red/10 hover:text-vos-red disabled:opacity-40"
+        className="inline-flex min-h-10 items-center justify-center rounded-md border border-vos-red/30 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-vos-red/80 transition-all hover:border-vos-red hover:bg-vos-red/10 hover:text-vos-red active:translate-y-px active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-40 sm:min-h-0"
       >
         {pending ? "…" : label}
       </button>

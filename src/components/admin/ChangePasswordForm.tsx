@@ -75,7 +75,11 @@ export default function ChangePasswordForm() {
         <FieldError messages={fe.confirmPassword} />
       </div>
 
-      <Button type="submit" disabled={pending} className="mt-1">
+      <Button
+        type="submit"
+        disabled={pending}
+        className="mt-1 active:translate-y-px active:scale-[0.99]"
+      >
         <KeyRound className="size-4" />
         {pending ? "Updating…" : "Update password"}
       </Button>

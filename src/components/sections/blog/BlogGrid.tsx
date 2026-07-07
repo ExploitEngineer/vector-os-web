@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { Section } from "@/components/ui/Section";
 import { useInView } from "@/hooks/useInView";
 import { CAT_COLORS } from "@/lib/theme";
 import type { Blog } from "@/types";
@@ -23,10 +24,10 @@ function filterButtonClass(active: boolean, filter: string) {
   if (!active)
     return `${base} border-white/[0.08] bg-transparent text-white/35 hover:border-white/20 hover:bg-white/[0.04] hover:text-white/80`;
   if (filter === "LINUX")
-    return `${base} border-vos-green bg-vos-green text-black shadow-[0_0_14px_rgba(34,255,110,0.3)]`;
+    return `${base} border-vos-green bg-vos-green text-black shadow-[0_0_14px_rgb(var(--glow-green)/0.3)]`;
   if (filter === "SECURITY")
-    return `${base} border-vos-red bg-vos-red text-white shadow-[0_0_14px_rgba(255,45,85,0.3)]`;
-  return `${base} border-vos-cyan bg-vos-cyan text-black shadow-[0_0_14px_rgba(0,229,255,0.3)]`;
+    return `${base} border-vos-red bg-vos-red text-white shadow-[0_0_14px_rgb(255_45_85_/_0.3)]`;
+  return `${base} border-vos-cyan bg-vos-cyan text-black shadow-[0_0_14px_rgb(var(--glow-cyan)/0.3)]`;
 }
 
 export default function BlogGrid({ posts }: { posts: Blog[] }) {
@@ -50,11 +51,11 @@ export default function BlogGrid({ posts }: { posts: Blog[] }) {
   const hasMore = filtered.length > POSTS_PAGE_SIZE && !showAll;
 
   return (
-    <div className="w-full px-12 py-[100px] max-[900px]:px-8 max-[900px]:py-20 max-[480px]:px-5 max-[480px]:py-[60px]">
+    <Section as="div">
       <div ref={ref} className="mx-auto w-full max-w-[1200px]">
         {/* controls */}
         <div
-          className={`mb-4 flex flex-wrap items-center justify-between gap-3 opacity-0 max-[480px]:flex-col max-[480px]:items-stretch max-[480px]:gap-2.5 ${gridVisible ? "animate-[fade-up_0.7s_cubic-bezier(0.22,1,0.36,1)_0.1s_forwards]" : ""}`}
+          className={`mb-4 flex flex-wrap items-center justify-between gap-3 opacity-0 max-[480px]:flex-col max-[480px]:items-stretch max-[480px]:gap-2.5 ${gridVisible ? "animate-[fade-up_0.7s_var(--ease-settle)_0.1s_forwards]" : ""}`}
         >
           <div className="flex h-9 min-w-[140px] flex-1 items-center gap-2 rounded border border-white/[0.08] bg-vos-surface px-3 transition-colors focus-within:border-vos-cyan/30 max-[480px]:w-full">
             <span className="flex-shrink-0 text-[12px] text-white/25">⌕</span>
@@ -99,7 +100,10 @@ export default function BlogGrid({ posts }: { posts: Blog[] }) {
         </div>
 
         <div className="mb-6 flex items-center justify-between">
-          <span className="font-mono text-[10px] tracking-[0.15em] text-white/20">
+          <span
+            key={`${filtered.length}-${activeFilter}-${search}`}
+            className="font-mono text-[10px] tracking-[0.15em] text-white/20 animate-[flicker-in_0.42s_steps(6,end)_both]"
+          >
             {filtered.length === 0
               ? "// No results"
               : `// Showing ${visiblePosts.length} of ${filtered.length} post${filtered.length !== 1 ? "s" : ""}`}
@@ -107,8 +111,11 @@ export default function BlogGrid({ posts }: { posts: Blog[] }) {
         </div>
         <div className="mb-8 h-px bg-white/[0.06]" />
 
-        {/* grid */}
-        <div className="grid grid-cols-3 gap-4 max-[900px]:grid-cols-2 max-[900px]:gap-3.5 max-[480px]:grid-cols-1 max-[480px]:gap-3">
+        {/* grid — switches channel (CRT flicker) when the category changes */}
+        <div
+          key={activeFilter}
+          className="grid grid-cols-3 gap-4 animate-[flicker-in_0.4s_steps(5,end)_both] max-[900px]:grid-cols-2 max-[900px]:gap-3.5 max-[480px]:grid-cols-1 max-[480px]:gap-3"
+        >
           {filtered.length === 0 ? (
             <div className="col-span-full py-[60px] text-center font-mono text-[12px] uppercase tracking-[0.2em] text-white/20">
               {"// No posts match your search"}
@@ -120,7 +127,7 @@ export default function BlogGrid({ posts }: { posts: Blog[] }) {
                 <Link
                   href={`/blogs/${post.slug}`}
                   key={post.id}
-                  className="group relative flex flex-col gap-3.5 overflow-hidden rounded-md border border-white/[0.07] bg-vos-surface p-6 no-underline transition-[border-color,transform,box-shadow] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] animate-[card-in_0.5s_cubic-bezier(0.22,1,0.36,1)_both] hover:-translate-y-1 hover:border-vos-cyan/[0.28] hover:shadow-[0_16px_48px_rgba(0,0,0,0.5),0_0_40px_rgba(0,229,255,0.05)] max-[480px]:p-[18px]"
+                  className="group relative flex flex-col gap-3.5 overflow-hidden rounded-md border border-white/[0.07] bg-vos-surface p-6 no-underline transition-[border-color,transform,box-shadow] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] animate-[card-in_0.5s_var(--ease-settle)_both] hover:-translate-y-1 hover:border-vos-cyan/[0.28] hover:shadow-[0_16px_48px_rgba(0,0,0,0.5),0_0_40px_rgb(var(--glow-cyan)/0.05)] max-[480px]:p-[18px]"
                   style={{ animationDelay: `${i * 0.07}s` }}
                 >
                   <span className="absolute inset-x-0 top-0 z-[2] h-0.5 bg-gradient-to-r from-transparent via-vos-cyan to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -179,6 +186,6 @@ export default function BlogGrid({ posts }: { posts: Blog[] }) {
           </div>
         )}
       </div>
-    </div>
+    </Section>
   );
 }
