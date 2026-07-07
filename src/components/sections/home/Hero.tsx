@@ -148,7 +148,6 @@ export default function Hero({
       canvas.height = canvas.offsetHeight;
     };
     resize();
-    window.addEventListener("resize", resize);
     ctx.imageSmoothingEnabled = false;
 
     const stars = Array.from({ length: 70 }, () => ({
@@ -188,10 +187,16 @@ export default function Hero({
     };
 
     if (reduced) {
-      paint(); // one static frame, no loop
-      return () => window.removeEventListener("resize", resize);
+      const resizeAndPaint = () => {
+        resize();
+        paint();
+      };
+      resizeAndPaint(); // one static frame, no loop
+      window.addEventListener("resize", resizeAndPaint);
+      return () => window.removeEventListener("resize", resizeAndPaint);
     }
 
+    window.addEventListener("resize", resize);
     const draw = (now: number) => {
       if (visible && now - last >= FRAME) {
         last = now;

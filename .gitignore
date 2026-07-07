@@ -43,3 +43,6 @@ next-env.d.ts
 
 # claude code — transient runtime locks (skills are tracked)
 .claude/scheduled_tasks.lock
+
+# lavish review artifacts (HTML report + screenshots)
+.lavish/
