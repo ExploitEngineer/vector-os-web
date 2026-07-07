@@ -194,7 +194,7 @@ export default function ProjectGrid({
 
             <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
               <span
-                key={`${sorted.length}-${typeFilter}-${langFilter}-${search}`}
+                key={`${sorted.length}-${typeFilter}-${langFilter}`}
                 className="font-mono text-[10px] tracking-[0.14em] text-white/20 animate-[flicker-in_0.42s_steps(6,end)_both]"
               >
                 {sorted.length === 0

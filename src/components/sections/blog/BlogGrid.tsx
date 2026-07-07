@@ -101,7 +101,7 @@ export default function BlogGrid({ posts }: { posts: Blog[] }) {
 
         <div className="mb-6 flex items-center justify-between">
           <span
-            key={`${filtered.length}-${activeFilter}-${search}`}
+            key={`${filtered.length}-${activeFilter}`}
             className="font-mono text-[10px] tracking-[0.15em] text-white/20 animate-[flicker-in_0.42s_steps(6,end)_both]"
           >
             {filtered.length === 0

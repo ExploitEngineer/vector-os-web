@@ -81,7 +81,7 @@ export default function Hero({
         Math.abs(c.y - t.y) < 0.01 &&
         Math.abs(c.tx - t.tx) < 0.05 &&
         Math.abs(c.ty - t.ty) < 0.05;
-      if (settled && t.x === 0 && t.y === 0 && t.tx === 0 && t.ty === 0) {
+      if (settled) {
         tiltRunning.current = false; // park until the next pointer move
         return;
       }
