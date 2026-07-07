@@ -125,7 +125,7 @@ export default function GetInvolved() {
             href={GITHUB_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-14 translate-x-[var(--mx,0)] translate-y-[var(--my,0)] items-center gap-2.5 rounded-sm border border-vos-cyan bg-vos-cyan px-10 font-mono text-[12px] font-bold uppercase tracking-[0.2em] text-black transition-[transform,box-shadow] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:shadow-[0_8px_30px_rgb(var(--glow-cyan)/0.3)] active:scale-[0.98] max-[900px]:h-[50px] max-[900px]:px-7 max-[900px]:text-[11px] max-[480px]:h-12 max-[480px]:w-full max-[480px]:justify-center max-[480px]:px-5 max-[480px]:tracking-[0.16em]"
+            className="inline-flex h-14 translate-x-[var(--mx,0)] translate-y-[var(--my,0)] items-center gap-2.5 rounded-sm border border-vos-cyan bg-vos-cyan px-10 font-mono text-[12px] font-bold uppercase tracking-[0.2em] text-black transition-[translate,scale,box-shadow] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:shadow-[0_8px_30px_rgb(var(--glow-cyan)/0.3)] active:scale-[0.98] max-[900px]:h-[50px] max-[900px]:px-7 max-[900px]:text-[11px] max-[480px]:h-12 max-[480px]:w-full max-[480px]:justify-center max-[480px]:px-5 max-[480px]:tracking-[0.16em]"
           >
             START CONTRIBUTING →
           </a>

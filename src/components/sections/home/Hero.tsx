@@ -302,7 +302,7 @@ export default function Hero({
         <Link
           ref={ctaRef}
           href="/projects"
-          className="group relative mt-[34px] inline-flex h-[54px] translate-x-[var(--mx,0)] translate-y-[var(--my,0)] items-center overflow-hidden rounded-[1px] border border-white bg-white px-9 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black transition-[transform,border-color] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:border-white/40 active:scale-[0.98] max-[900px]:mt-7 max-[900px]:h-[50px] max-[900px]:px-[30px] max-[480px]:mt-7 max-[480px]:h-12 max-[480px]:px-7 max-[480px]:text-[10px] max-[480px]:tracking-[0.16em]"
+          className="group relative mt-[34px] inline-flex h-[54px] translate-x-[var(--mx,0)] translate-y-[var(--my,0)] items-center overflow-hidden rounded-[1px] border border-white bg-white px-9 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black transition-[translate,scale,border-color] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:border-white/40 active:scale-[0.98] max-[900px]:mt-7 max-[900px]:h-[50px] max-[900px]:px-[30px] max-[480px]:mt-7 max-[480px]:h-12 max-[480px]:px-7 max-[480px]:text-[10px] max-[480px]:tracking-[0.16em]"
         >
           <span className="absolute inset-0 z-0 -translate-x-[101%] bg-black transition-transform duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0" />
           <span className="relative z-[1] flex items-center gap-[11px] transition-colors duration-[250ms] group-hover:text-white">

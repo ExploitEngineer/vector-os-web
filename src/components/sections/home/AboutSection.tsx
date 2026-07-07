@@ -129,7 +129,7 @@ export default function AboutSection({ stats }: { stats?: GithubOrgStats }) {
               <Link
                 ref={browseRef}
                 href="/projects"
-                className="group/btn relative inline-flex h-12 translate-x-[var(--mx,0)] translate-y-[var(--my,0)] items-center gap-2.5 overflow-hidden rounded-sm border border-white bg-white px-7 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-black transition-[transform,border-color] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:border-vos-cyan active:scale-[0.98] max-[480px]:h-11 max-[480px]:w-full max-[480px]:justify-center max-[480px]:px-5 max-[480px]:text-[10px]"
+                className="group/btn relative inline-flex h-12 translate-x-[var(--mx,0)] translate-y-[var(--my,0)] items-center gap-2.5 overflow-hidden rounded-sm border border-white bg-white px-7 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-black transition-[translate,scale,border-color] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:border-vos-cyan active:scale-[0.98] max-[480px]:h-11 max-[480px]:w-full max-[480px]:justify-center max-[480px]:px-5 max-[480px]:text-[10px]"
               >
                 <span className="absolute inset-0 -translate-x-[101%] bg-vos-cyan transition-transform duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/btn:translate-x-0" />
                 <span className="relative z-[1]">BROWSE PROJECTS →</span>
