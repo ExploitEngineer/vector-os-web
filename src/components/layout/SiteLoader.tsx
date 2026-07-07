@@ -117,7 +117,7 @@ export default function SiteLoader({
   return (
     <div
       aria-hidden={exiting}
-      className={`fixed inset-0 z-[99999] flex flex-col items-center justify-center overflow-hidden bg-vos-black transition-[transform,border-radius] ease-[cubic-bezier(0.76,0,0.24,1)] ${
+      className={`fixed inset-0 z-[99999] flex flex-col items-center justify-center overflow-hidden bg-vos-black transition-[transform,border-radius] ease-[cubic-bezier(0.76,0,0.24,1)] motion-reduce:hidden ${
         exiting ? "-translate-y-full" : "translate-y-0"
       }`}
       style={{

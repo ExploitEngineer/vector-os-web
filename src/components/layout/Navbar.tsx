@@ -23,6 +23,17 @@ export default function Navbar() {
     setMobileOpen(false);
   }, [pathname]);
 
+  // Close the menu (and release its scroll-lock) once the viewport grows past
+  // the mobile breakpoint, since the dropdown is hidden by CSS above 900px.
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 900px)");
+    const onChange = (e: MediaQueryListEvent) => {
+      if (e.matches) setMobileOpen(false);
+    };
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
   // While the mobile menu is open: lock body scroll, close on Escape, and
   // close on a click/tap outside the nav shell.
   useEffect(() => {
