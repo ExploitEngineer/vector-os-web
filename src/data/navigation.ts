@@ -7,7 +7,7 @@ export const SUPPORT_EMAIL = "support@vectoros.dpdns.org";
 export const NAV_LINKS: NavLink[] = [
   { label: "Home", href: "/" },
   { label: "Projects", href: "/projects" },
-  { label: "Blog", href: "/blogs" },
+  { label: "Blogs", href: "/blogs" },
   { label: "About", href: "/about" },
 ];
 
