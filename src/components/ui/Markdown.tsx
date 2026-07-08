@@ -1,4 +1,5 @@
 import ReactMarkdown, { type Components } from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
 
 const components: Components = {
@@ -48,10 +49,12 @@ const components: Components = {
     </blockquote>
   ),
   code: ({ className, children }) => {
+    // rehype-highlight tags block code with `hljs language-*` and wraps tokens
+    // in `hljs-*` spans. Preserve that className so the .hljs styles apply.
     const isBlock = (className ?? "").includes("language-");
     if (isBlock) {
       return (
-        <code className="font-mono text-[12px] leading-[1.8] text-vos-green">
+        <code className={`${className ?? ""} font-mono text-[12px] leading-[1.8]`}>
           {children}
         </code>
       );
@@ -81,7 +84,11 @@ const components: Components = {
 
 export default function Markdown({ children }: { children: string }) {
   return (
-    <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
+      rehypePlugins={[[rehypeHighlight, { detect: true, ignoreMissing: true }]]}
+      components={components}
+    >
       {children}
     </ReactMarkdown>
   );

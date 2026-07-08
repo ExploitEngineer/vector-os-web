@@ -7,11 +7,10 @@ config();
 import { neon } from "@neondatabase/serverless";
 import { sql as dsql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/neon-http";
-import { POSTS } from "@/data/posts";
+import { loadPosts } from "@/lib/content/posts";
 import { PROJECTS } from "@/data/projects";
 import { MEMBERS } from "@/data/team";
 import * as schema from "@/lib/db/schema";
-import { slugify } from "@/lib/slug";
 
 async function main() {
   const url = process.env.DATABASE_URL;
@@ -48,26 +47,36 @@ async function main() {
     console.log("Projects already present — skipping.");
   }
 
-  const [{ c: blogCount }] = await db
-    .select({ c: countAll })
-    .from(schema.blogs);
-  if (blogCount === 0) {
-    await db.insert(schema.blogs).values(
-      POSTS.map((p, i) => ({
-        slug: slugify(p.title),
+  // Upsert by slug so real Markdown bodies refresh existing placeholder rows.
+  // Safe to re-run: the loader is the source of truth for content.
+  const posts = loadPosts();
+  await db
+    .insert(schema.blogs)
+    .values(
+      posts.map((p) => ({
+        slug: p.slug,
         title: p.title,
         excerpt: p.excerpt,
-        content: `${p.excerpt}\n\n_Full write-up coming soon._`,
+        content: p.content,
         category: p.category,
         published: true,
         publishedAt: new Date(p.date),
-        displayOrder: i,
+        displayOrder: p.displayOrder,
       })),
-    );
-    console.log(`Seeded ${POSTS.length} posts.`);
-  } else {
-    console.log("Blogs already present — skipping.");
-  }
+    )
+    .onConflictDoUpdate({
+      target: schema.blogs.slug,
+      set: {
+        title: dsql`excluded.title`,
+        excerpt: dsql`excluded.excerpt`,
+        content: dsql`excluded.content`,
+        category: dsql`excluded.category`,
+        published: dsql`excluded.published`,
+        publishedAt: dsql`excluded.published_at`,
+        displayOrder: dsql`excluded.display_order`,
+      },
+    });
+  console.log(`Upserted ${posts.length} posts.`);
 
   const [{ c: teamCount }] = await db
     .select({ c: countAll })
