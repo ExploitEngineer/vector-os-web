@@ -54,7 +54,9 @@ const components: Components = {
     const isBlock = (className ?? "").includes("language-");
     if (isBlock) {
       return (
-        <code className={`${className ?? ""} font-mono text-[12px] leading-[1.8]`}>
+        <code
+          className={`${className ?? ""} font-mono text-[12px] leading-[1.8]`}
+        >
           {children}
         </code>
       );

@@ -7,9 +7,9 @@ config();
 import { neon } from "@neondatabase/serverless";
 import { sql as dsql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/neon-http";
-import { loadPosts } from "@/lib/content/posts";
 import { PROJECTS } from "@/data/projects";
 import { MEMBERS } from "@/data/team";
+import { loadPosts } from "@/lib/content/posts";
 import * as schema from "@/lib/db/schema";
 
 async function main() {
