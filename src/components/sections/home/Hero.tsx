@@ -124,10 +124,9 @@ export default function Hero({
     startTiltLoop();
   }, [startTiltLoop]);
 
-  // Animated film-grain + twinkling starfield. Cheap version: noise is rendered
-  // into a small offscreen buffer and scaled up (chunky CRT grain) instead of
-  // writing every viewport pixel per frame, capped to ~30fps, and paused when
-  // the hero is off-screen or the tab is hidden. Skipped under reduced-motion.
+  // Quiet twinkling starfield. Sparse points gently pulse over black; capped to
+  // ~30fps and paused when the hero is off-screen or the tab is hidden. Under
+  // reduced-motion it paints a single static frame.
   useEffect(() => {
     const canvas = canvasRef.current;
     const section = sectionRef.current;
@@ -135,20 +134,11 @@ export default function Hero({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Low-res noise buffer — ~48k pixels regardless of viewport size.
-    const buf = document.createElement("canvas");
-    buf.width = 220;
-    buf.height = 220;
-    const bctx = buf.getContext("2d");
-    if (!bctx) return;
-    const noise = bctx.createImageData(buf.width, buf.height);
-
     const resize = () => {
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
     };
     resize();
-    ctx.imageSmoothingEnabled = false;
 
     const stars = Array.from({ length: 70 }, () => ({
       x: Math.random(),
@@ -165,17 +155,7 @@ export default function Hero({
     const paint = () => {
       const w = canvas.width;
       const h = canvas.height;
-      const d = noise.data;
-      for (let i = 0; i < d.length; i += 4) {
-        const n = Math.random() * 10;
-        d[i] = n;
-        d[i + 1] = n;
-        d[i + 2] = n;
-        d[i + 3] = 255;
-      }
-      bctx.putImageData(noise, 0, 0);
       ctx.clearRect(0, 0, w, h);
-      ctx.drawImage(buf, 0, 0, w, h);
       for (const s of stars) {
         const pulse = 0.1 + 0.5 * (0.5 + 0.5 * Math.sin(t * 1.4 + s.phase));
         ctx.globalAlpha = pulse * 0.6;
@@ -250,8 +230,10 @@ export default function Hero({
       {/* background layers */}
       <canvas
         ref={canvasRef}
-        className="pointer-events-none absolute inset-0 z-0 h-full w-full opacity-[0.85]"
+        className="pointer-events-none absolute inset-0 z-0 h-full w-full opacity-[0.7]"
       />
+      {/* soft static depth bloom — a calm pool of light behind the headline */}
+      <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[85%] w-[92%] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse_at_center,rgb(0_229_255_/_0.04)_0%,rgba(255,255,255,0.02)_38%,transparent_72%)]" />
       <div className="pointer-events-none absolute left-1/2 top-1/2 z-[1] h-1/2 w-3/5 -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.04)_0%,transparent_65%)]" />
       {/* cursor-tracked cyan spotlight */}
       <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(420px_circle_at_var(--gx,50%)_var(--gy,38%),rgb(0_229_255_/_0.06),transparent_62%)]" />
