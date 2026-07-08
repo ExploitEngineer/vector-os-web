@@ -27,7 +27,10 @@ export default function ProjectForm({
   const fe = state.fieldErrors ?? {};
 
   return (
-    <form action={formAction} className="max-w-2xl">
+    <form
+      action={formAction}
+      className="max-w-2xl animate-[fade-up_0.5s_var(--ease-settle)_both]"
+    >
       {state.error ? <FormBanner>{state.error}</FormBanner> : null}
 
       <FormField label="Name" htmlFor="name" error={fe.name}>
@@ -61,7 +64,7 @@ export default function ProjectForm({
         />
       </FormField>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <FormField label="Language" error={fe.lang}>
           <input
             name="lang"
@@ -80,7 +83,7 @@ export default function ProjectForm({
         </FormField>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <FormField label="Status" error={fe.status}>
           <select
             name="status"
@@ -88,7 +91,7 @@ export default function ProjectForm({
             className={inputClass}
           >
             {STATUS.map((s) => (
-              <option key={s.value} value={s.value} className="bg-[#0d0d0d]">
+              <option key={s.value} value={s.value} className="bg-vos-panel-2">
                 {s.label}
               </option>
             ))}
@@ -116,7 +119,7 @@ export default function ProjectForm({
         />
       </FormField>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <FormField label="Project URL" error={fe.url}>
           <input
             name="url"
@@ -174,7 +177,7 @@ export default function ProjectForm({
         Featured
       </label>
 
-      <div>
+      <div className="mt-2">
         <SubmitButton pending={pending} label={submitLabel} />
       </div>
     </form>

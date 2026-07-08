@@ -109,12 +109,21 @@ export default async function AdminDashboardPage() {
         subtitle="Overview of the content powering the public site."
         action={
           <div className="flex gap-2">
-            <Button asChild variant="outline" size="sm">
+            <Button
+              asChild
+              variant="outline"
+              size="sm"
+              className="active:translate-y-px active:scale-[0.99]"
+            >
               <Link href="/admin/projects/new">
                 <Plus className="size-3.5" /> Project
               </Link>
             </Button>
-            <Button asChild size="sm">
+            <Button
+              asChild
+              size="sm"
+              className="active:translate-y-px active:scale-[0.99]"
+            >
               <Link href="/admin/blogs/new">
                 <Plus className="size-3.5" /> Post
               </Link>
@@ -124,11 +133,16 @@ export default async function AdminDashboardPage() {
       />
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        {stats.map((s) => {
+        {stats.map((s, i) => {
           const Icon = s.icon;
           return (
-            <Link key={s.label} href={s.href}>
-              <Card className="gap-0 py-5 transition-colors hover:border-primary/30">
+            <Link
+              key={s.label}
+              href={s.href}
+              className="block animate-[fade-up_0.5s_var(--ease-settle)_both]"
+              style={{ animationDelay: `${i * 60}ms` }}
+            >
+              <Card className="gap-0 py-5 transition-all hover:border-primary/30 active:translate-y-px active:scale-[0.99]">
                 <CardContent className="flex items-start justify-between">
                   <div>
                     <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
@@ -151,14 +165,20 @@ export default async function AdminDashboardPage() {
         })}
       </div>
 
-      <div className="mt-4">
+      <div
+        className="mt-4 animate-[fade-up_0.5s_var(--ease-settle)_both]"
+        style={{ animationDelay: "300ms" }}
+      >
         <DashboardCharts
           postsPerMonth={buildPostsPerMonth(blogs)}
           projectsByStatus={projectsByStatus}
         />
       </div>
 
-      <Card className="mt-4">
+      <Card
+        className="mt-4 animate-[fade-up_0.5s_var(--ease-settle)_both]"
+        style={{ animationDelay: "360ms" }}
+      >
         <CardHeader>
           <CardTitle className="font-mono text-sm uppercase tracking-[0.12em]">
             Recent posts
@@ -174,7 +194,7 @@ export default async function AdminDashboardPage() {
               <Link
                 key={b.id}
                 href={`/admin/blogs/${b.id}/edit`}
-                className="flex items-center justify-between gap-3 rounded-md px-2 py-2.5 transition-colors hover:bg-white/[0.03]"
+                className="flex min-h-10 items-center justify-between gap-3 rounded-md px-2 py-2.5 transition-colors hover:bg-white/[0.03] active:bg-white/[0.06]"
               >
                 <span className="flex min-w-0 items-center gap-3">
                   <span

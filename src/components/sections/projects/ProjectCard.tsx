@@ -22,17 +22,23 @@ export default function ProjectCard({
       href={p.url}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group relative z-[1] flex flex-col overflow-hidden rounded-md border border-white/[0.07] bg-vos-surface no-underline opacity-0 transition-[border-color,transform,box-shadow] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:z-[2] hover:-translate-y-1 hover:border-vos-cyan/30 hover:shadow-[0_16px_48px_rgba(0,0,0,0.6),0_0_0_1px_rgba(0,229,255,0.1),0_0_40px_rgba(0,229,255,0.05)] ${
-        visible
-          ? "animate-[fade-up_0.6s_cubic-bezier(0.22,1,0.36,1)_forwards]"
-          : ""
+      className={`group relative z-[1] flex flex-col overflow-hidden rounded-md border border-white/[0.07] bg-vos-surface no-underline opacity-0 transition-[border-color,transform,box-shadow] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:z-[2] hover:-translate-y-1 hover:border-vos-cyan/30 hover:shadow-[0_16px_48px_rgba(0,0,0,0.6),0_0_0_1px_rgb(var(--glow-cyan)/0.1),0_0_40px_rgb(var(--glow-cyan)/0.05)] ${
+        visible ? "animate-[fade-up_0.6s_var(--ease-settle)_forwards]" : ""
       }`}
       style={{ animationDelay: `${index * 0.07}s` }}
     >
+      {/* scan-sweep once on reveal */}
+      {visible && (
+        <span
+          className="pointer-events-none absolute inset-0 z-[3] bg-[linear-gradient(to_bottom,transparent_44%,rgb(var(--glow-cyan)/0.4)_50%,transparent_56%)] animate-[scan-sweep_0.85s_var(--ease-settle)_both]"
+          style={{ animationDelay: `${0.15 + index * 0.07}s` }}
+        />
+      )}
+
       <span className="absolute inset-x-0 top-0 z-[2] h-0.5 bg-gradient-to-r from-transparent via-vos-cyan to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
       {/* terminal chrome */}
-      <div className="flex items-center gap-2 border-b border-white/[0.05] bg-[#050505] px-3.5 py-2.5">
+      <div className="flex items-center gap-2 border-b border-white/[0.05] bg-vos-ink px-3.5 py-2.5">
         <span className="flex-shrink-0 font-mono text-[10px] text-vos-green">
           &gt;_
         </span>
@@ -52,7 +58,7 @@ export default function ProjectCard({
       </div>
 
       {/* scrolling bootlog */}
-      <div className="relative h-40 overflow-hidden bg-[#030303]">
+      <div className="relative h-40 overflow-hidden bg-vos-void">
         <div
           className="flex flex-col px-4 py-3 group-hover:[animation:scroll-logs_var(--speed)_linear_infinite]"
           style={{ ["--speed" as string]: p.scrollSpeed }}
@@ -67,7 +73,7 @@ export default function ProjectCard({
             </span>
           ))}
         </div>
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-14 bg-gradient-to-b from-transparent to-[#030303]" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-14 bg-gradient-to-b from-transparent to-vos-void" />
       </div>
 
       {/* body */}

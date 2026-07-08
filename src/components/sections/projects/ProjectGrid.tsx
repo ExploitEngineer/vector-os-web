@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Container } from "@/components/ui/Container";
 import Dropdown from "@/components/ui/Dropdown";
+import { Section } from "@/components/ui/Section";
 import { useInView } from "@/hooks/useInView";
 import { LANG_COLORS } from "@/lib/theme";
 import type { Project } from "@/types";
@@ -110,15 +112,16 @@ export default function ProjectGrid({
 
   const reveal = (delay: string) =>
     visible
-      ? `animate-[fade-up_0.7s_cubic-bezier(0.22,1,0.36,1)_${delay}_forwards]`
+      ? `animate-[fade-up_0.7s_var(--ease-settle)_${delay}_forwards]`
       : "";
 
   return (
-    <section
+    <Section
+      as="section"
       ref={outerRef}
-      className="w-full border-t border-white/[0.06] bg-vos-black px-12 py-[100px] max-[900px]:px-8 max-[900px]:py-20 max-[480px]:px-5 max-[480px]:py-[60px]"
+      className="border-t border-white/[0.06]"
     >
-      <div className="mx-auto w-full max-w-[1200px]">
+      <Container>
         <p
           className={`mb-10 flex items-center gap-4 font-mono text-[13px] uppercase tracking-[0.3em] text-white/35 opacity-0 after:h-px after:flex-1 after:bg-white/[0.07] after:content-[''] max-[900px]:mb-8 max-[900px]:text-[11px] max-[480px]:mb-6 max-[480px]:text-[10px] max-[480px]:tracking-[0.2em] ${reveal("0.1s")}`}
         >
@@ -132,7 +135,7 @@ export default function ProjectGrid({
               ref={barRef}
               className={`relative z-50 mb-8 flex flex-wrap items-center gap-2 opacity-0 max-[900px]:gap-1.5 ${reveal("0.15s")}`}
             >
-              <div className="flex h-[34px] min-w-[140px] flex-1 items-center gap-2 rounded-md border border-white/[0.12] bg-[#0d0d0d] px-3 transition-[border-color,box-shadow] focus-within:border-vos-cyan/40 focus-within:shadow-[0_0_0_3px_rgba(0,229,255,0.08)] max-[480px]:w-full max-[480px]:flex-none">
+              <div className="flex h-[34px] min-w-[140px] flex-1 items-center gap-2 rounded-md border border-white/[0.12] bg-vos-panel-2 px-3 transition-[border-color,box-shadow] focus-within:border-vos-cyan/40 focus-within:shadow-[0_0_0_3px_rgb(var(--glow-cyan)/0.08)] max-[480px]:w-full max-[480px]:flex-none">
                 <span className="flex-shrink-0 text-[13px] text-white/30">
                   ⌕
                 </span>
@@ -190,7 +193,10 @@ export default function ProjectGrid({
             </div>
 
             <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
-              <span className="font-mono text-[10px] tracking-[0.14em] text-white/20">
+              <span
+                key={`${sorted.length}-${typeFilter}-${langFilter}`}
+                className="font-mono text-[10px] tracking-[0.14em] text-white/20 animate-[flicker-in_0.42s_steps(6,end)_both]"
+              >
                 {sorted.length === 0
                   ? "// No results"
                   : `// ${sorted.length} of ${projects.length} projects`}
@@ -266,7 +272,7 @@ export default function ProjectGrid({
             </button>
           </div>
         )}
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }

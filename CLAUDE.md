@@ -55,7 +55,7 @@ app. When touching these components, watch for three Framer-export hazards:
 
 Routes: `/` (home), `/projects`, `/blogs`, `/about`. Navbar, footer, and a session-gated loader
 are **shared in `src/app/layout.tsx`**, not per page. Supporting code is separated into
-`src/hooks/` (shared `useInView`/`useScramble`/`useCountUp`), `src/data/` (typed content:
+`src/hooks/` (shared `useInView`/`useScramble`/`useCountUp`/`useReducedMotion`/`useMagnetic`/`useSequence`), `src/data/` (typed content:
 projects, posts, team, navigation, ticker, mission), and `src/lib/` (constants + dynamic color
 maps). Section components live under `src/components/{layout,sections,ui}/`; unwired leftovers
 sit in `src/components/_unused/` and must not be imported by any route.

@@ -23,7 +23,10 @@ export default function BlogForm({
   const fe = state.fieldErrors ?? {};
 
   return (
-    <form action={formAction} className="max-w-2xl">
+    <form
+      action={formAction}
+      className="max-w-2xl animate-[fade-up_0.5s_var(--ease-settle)_both]"
+    >
       {state.error ? <FormBanner>{state.error}</FormBanner> : null}
 
       <FormField label="Title" htmlFor="title" error={fe.title}>
@@ -48,7 +51,7 @@ export default function BlogForm({
         />
       </FormField>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <FormField label="Category" error={fe.category}>
           <select
             name="category"
@@ -56,7 +59,7 @@ export default function BlogForm({
             className={inputClass}
           >
             {CATEGORIES.map((c) => (
-              <option key={c} value={c} className="bg-[#0d0d0d]">
+              <option key={c} value={c} className="bg-vos-panel-2">
                 {c}
               </option>
             ))}
@@ -110,7 +113,7 @@ export default function BlogForm({
         Published (visible on the public site)
       </label>
 
-      <div>
+      <div className="mt-2">
         <SubmitButton pending={pending} label={submitLabel} />
       </div>
     </form>

@@ -21,10 +21,11 @@ export default async function AdminTeamPage() {
         </p>
       ) : (
         <div className="overflow-hidden rounded-lg border border-white/[0.07]">
-          {team.map((m) => (
+          {team.map((m, i) => (
             <div
               key={m.id}
-              className="flex flex-wrap items-center justify-between gap-3 border-b border-white/[0.05] bg-vos-surface px-5 py-3.5 last:border-b-0"
+              className="flex flex-wrap items-center justify-between gap-3 border-b border-white/[0.05] bg-vos-surface px-5 py-3.5 last:border-b-0 animate-[fade-up_0.5s_var(--ease-settle)_both]"
+              style={{ animationDelay: `${Math.min(i, 12) * 40}ms` }}
             >
               <div className="min-w-0">
                 <p className="truncate font-mono text-[13px] text-white/85">
@@ -37,7 +38,7 @@ export default async function AdminTeamPage() {
               <div className="flex items-center gap-3">
                 <Link
                   href={`/admin/team/${m.id}/edit`}
-                  className="rounded-md border border-white/[0.12] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-white/55 transition-colors hover:border-vos-cyan/40 hover:text-white/90"
+                  className="inline-flex min-h-10 items-center justify-center rounded-md border border-white/[0.12] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-white/55 transition-all hover:border-vos-cyan/40 hover:text-white/90 active:translate-y-px active:scale-[0.99] sm:min-h-0"
                 >
                   Edit
                 </Link>

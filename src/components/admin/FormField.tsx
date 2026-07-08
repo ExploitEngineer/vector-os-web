@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 
 export const inputClass =
-  "w-full min-w-0 rounded-md border border-input bg-[#0d0d0d] px-3 py-2 font-mono text-[13px] text-foreground caret-primary outline-none transition-[color,box-shadow,border-color] placeholder:text-muted-foreground/60 focus-visible:border-primary/50 focus-visible:ring-[3px] focus-visible:ring-ring/25 disabled:opacity-50";
+  "block min-h-10 w-full min-w-0 rounded-md border border-input bg-vos-panel-2 px-3 py-2 font-mono text-[13px] text-foreground caret-primary outline-none transition-[color,box-shadow,border-color] placeholder:text-muted-foreground/60 hover:border-primary/30 focus-visible:border-primary/50 focus-visible:ring-[3px] focus-visible:ring-ring/25 disabled:cursor-not-allowed disabled:opacity-50";
 
 export const labelClass =
   "mb-1.5 block font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground";
@@ -66,7 +66,12 @@ export function SubmitButton({
   label: string;
 }) {
   return (
-    <Button type="submit" disabled={pending} size="lg">
+    <Button
+      type="submit"
+      disabled={pending}
+      size="lg"
+      className="active:translate-y-px active:scale-[0.99]"
+    >
       {pending ? "Saving…" : label}
     </Button>
   );

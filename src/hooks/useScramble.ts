@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { SCRAMBLE_CHARS } from "@/lib/constants";
 
 // Deterministic placeholder for the initial (SSR) render. Using Math.random in
@@ -26,9 +27,15 @@ export function useScramble(
 ) {
   const [display, setDisplay] = useState(() => seedScramble(target, chars));
   const [done, setDone] = useState(false);
+  const reduced = useReducedMotion();
 
   useEffect(() => {
     if (!start) return;
+    if (reduced) {
+      setDisplay(target);
+      setDone(true);
+      return;
+    }
     const charsArr = target.split("");
     let revealed = 0;
     const id = setInterval(() => {
@@ -54,7 +61,7 @@ export function useScramble(
       }
     }, intervalMs);
     return () => clearInterval(id);
-  }, [start, target, intervalMs, chars]);
+  }, [start, target, intervalMs, chars, reduced]);
 
   return { display, done };
 }
@@ -81,9 +88,14 @@ export function useScrambleText(
   }: ScrambleTextOptions = {},
 ) {
   const [val, setVal] = useState(() => seedScramble(target, chars));
+  const reduced = useReducedMotion();
 
   useEffect(() => {
     if (!started) return;
+    if (reduced) {
+      setVal(target);
+      return;
+    }
     const t = setTimeout(() => {
       let frame = 0;
       const id = setInterval(() => {
@@ -108,7 +120,7 @@ export function useScrambleText(
       }, interval);
     }, delay);
     return () => clearTimeout(t);
-  }, [started, target, delay, frames, interval, chars]);
+  }, [started, target, delay, frames, interval, chars, reduced]);
 
   return val;
 }

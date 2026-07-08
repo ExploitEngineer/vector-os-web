@@ -78,7 +78,11 @@ export default function LoginForm() {
             ) : null}
           </div>
 
-          <Button type="submit" disabled={pending} className="mt-2 w-full">
+          <Button
+            type="submit"
+            disabled={pending}
+            className="mt-2 w-full active:translate-y-px active:scale-[0.99]"
+          >
             <LogIn className="size-4" />
             {pending ? "Signing in…" : "Sign in"}
           </Button>

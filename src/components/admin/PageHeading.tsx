@@ -31,7 +31,7 @@ export function PageHeading({
 
 export function NewLink({ href, label }: { href: string; label: string }) {
   return (
-    <Button asChild>
+    <Button asChild className="active:translate-y-px active:scale-[0.99]">
       <Link href={href}>{label}</Link>
     </Button>
   );
@@ -39,7 +39,12 @@ export function NewLink({ href, label }: { href: string; label: string }) {
 
 export function BackLink({ href, label }: { href: string; label: string }) {
   return (
-    <Button asChild variant="ghost" size="sm" className="mb-6 -ml-2">
+    <Button
+      asChild
+      variant="ghost"
+      size="sm"
+      className="mb-6 -ml-2 active:translate-y-px active:scale-[0.99]"
+    >
       <Link href={href}>
         <ArrowLeft className="size-3.5" />
         {label}

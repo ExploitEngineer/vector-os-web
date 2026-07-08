@@ -21,10 +21,13 @@ export default function TeamForm({
   const fe = state.fieldErrors ?? {};
 
   return (
-    <form action={formAction} className="max-w-2xl">
+    <form
+      action={formAction}
+      className="max-w-2xl animate-[fade-up_0.5s_var(--ease-settle)_both]"
+    >
       {state.error ? <FormBanner>{state.error}</FormBanner> : null}
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <FormField label="Name" htmlFor="name" error={fe.name}>
           <input
             id="name"
@@ -80,7 +83,7 @@ export default function TeamForm({
         defaultValue={member?.avatar ?? ""}
       />
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <FormField label="GitHub URL" error={fe.github}>
           <input
             name="github"
@@ -98,7 +101,7 @@ export default function TeamForm({
         </FormField>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <FormField label="LinkedIn URL" error={fe.linkedin}>
           <input
             name="linkedin"

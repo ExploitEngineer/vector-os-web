@@ -41,7 +41,7 @@ export default function ImageField({
       <input type="hidden" name={name} value={url} />
       <div className="flex flex-wrap items-start gap-3">
         {url ? (
-          <span className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border border-white/[0.12] bg-[#0d0d0d]">
+          <span className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border border-white/[0.12] bg-vos-panel-2">
             <Image
               src={url}
               alt="preview"
@@ -60,7 +60,10 @@ export default function ImageField({
             placeholder="https://… or upload below"
             className={inputClass}
           />
-          <label className="inline-flex cursor-pointer items-center gap-2 rounded-md border border-white/[0.12] bg-[#0d0d0d] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-white/50 transition-colors hover:border-vos-cyan/40 hover:text-white/80">
+          <label
+            aria-disabled={pending}
+            className="inline-flex min-h-10 cursor-pointer items-center gap-2 rounded-md border border-white/[0.12] bg-vos-panel-2 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-white/50 transition-all hover:border-vos-cyan/40 hover:text-white/80 active:translate-y-px active:scale-[0.99] aria-disabled:cursor-not-allowed aria-disabled:opacity-50 sm:min-h-0"
+          >
             {pending ? "Uploading…" : "↑ Upload image"}
             <input
               type="file"

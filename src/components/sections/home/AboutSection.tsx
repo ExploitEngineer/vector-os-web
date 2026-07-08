@@ -1,10 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
 import { GITHUB_URL } from "@/data/navigation";
 import { useCountUp } from "@/hooks/useCountUp";
 import { useInView } from "@/hooks/useInView";
+import { useMagnetic } from "@/hooks/useMagnetic";
 import { useScrambleText } from "@/hooks/useScramble";
+import { useSequence } from "@/hooks/useSequence";
 import type { GithubOrgStats } from "@/lib/services/github";
 import { COLORS } from "@/lib/theme";
 
@@ -12,7 +16,7 @@ import { COLORS } from "@/lib/theme";
 const FALLBACK_STATS: GithubOrgStats = { repos: 8, members: 7, stars: 38 };
 
 const statValue =
-  "block px-7 font-display text-[72px] leading-none text-white transition-[color,text-shadow] duration-300 group-hover/stat:text-vos-cyan group-hover/stat:[text-shadow:0_0_30px_rgba(0,229,255,0.3)] max-[900px]:px-5 max-[900px]:text-[52px] max-[480px]:px-4 max-[480px]:text-[40px]";
+  "block px-7 font-display text-[72px] leading-none text-white transition-[color,text-shadow] duration-300 group-hover/stat:text-vos-cyan group-hover/stat:[text-shadow:0_0_30px_rgb(var(--glow-cyan)/0.3)] max-[900px]:px-5 max-[900px]:text-[52px] max-[480px]:px-4 max-[480px]:text-[40px]";
 const statLabel =
   "block px-7 pt-2 font-mono text-[10px] uppercase tracking-[0.25em] text-white/25 max-[900px]:px-5 max-[900px]:pt-1.5 max-[900px]:text-[9px] max-[480px]:px-4 max-[480px]:tracking-[0.15em]";
 const statCell =
@@ -73,6 +77,7 @@ export default function AboutSection({ stats }: { stats?: GithubOrgStats }) {
   const { ref, inView } = useInView<HTMLElement>(0.1);
   const { ref: statsRef, inView: statsStarted } =
     useInView<HTMLDivElement>(0.3);
+  const browseRef = useMagnetic<HTMLAnchorElement>({ strength: 0.3, max: 8 });
 
   const s = stats ?? FALLBACK_STATS;
   const termRows = [
@@ -90,29 +95,28 @@ export default function AboutSection({ stats }: { stats?: GithubOrgStats }) {
     { key: "domain", val: "VERIFIED", color: COLORS.cyan },
     { key: "status", val: "[ACTIVE]", color: COLORS.green },
   ];
+  // The terminal "types" its rows out one at a time once the block reveals.
+  const printed = useSequence(termRows.length, inView, 200, 450);
 
   return (
-    <section
-      ref={ref}
-      className="w-full border-t border-white/[0.06] bg-vos-black px-12 py-[100px] max-[900px]:px-8 max-[900px]:py-20 max-[480px]:px-5 max-[480px]:py-[60px]"
-    >
-      <div className="mx-auto w-full max-w-[1200px]">
+    <Section ref={ref} className="border-t border-white/[0.06]">
+      <Container>
         <p
-          className={`mb-16 flex items-center gap-4 font-mono text-[13px] uppercase tracking-[0.3em] text-white/35 opacity-0 after:h-px after:flex-1 after:bg-white/[0.07] after:content-[''] max-[900px]:mb-10 max-[900px]:text-[11px] max-[480px]:mb-7 max-[480px]:text-[10px] max-[480px]:tracking-[0.2em] ${inView ? "animate-[fade-up_0.7s_cubic-bezier(0.22,1,0.36,1)_0.1s_forwards]" : ""}`}
+          className={`mb-16 flex items-center gap-4 font-mono text-[13px] uppercase tracking-[0.3em] text-white/35 opacity-0 after:h-px after:flex-1 after:bg-white/[0.07] after:content-[''] max-[900px]:mb-10 max-[900px]:text-[11px] max-[480px]:mb-7 max-[480px]:text-[10px] max-[480px]:tracking-[0.2em] ${inView ? "animate-[fade-up_0.7s_var(--ease-settle)_0.1s_forwards]" : ""}`}
         >
           <span className="tracking-normal text-vos-cyan/50">{"//"}</span>About
           Us
         </p>
 
         <div
-          className={`mb-20 grid grid-cols-[1fr_360px] items-start gap-20 opacity-0 max-[900px]:mb-12 max-[900px]:grid-cols-1 max-[900px]:gap-10 max-[480px]:mb-9 max-[480px]:gap-7 ${inView ? "animate-[fade-up_0.7s_cubic-bezier(0.22,1,0.36,1)_0.25s_forwards]" : ""}`}
+          className={`mb-20 grid grid-cols-[1fr_360px] items-start gap-20 opacity-0 max-[900px]:mb-12 max-[900px]:grid-cols-1 max-[900px]:gap-10 max-[480px]:mb-9 max-[480px]:gap-7 ${inView ? "animate-[fade-up_0.7s_var(--ease-settle)_0.25s_forwards]" : ""}`}
         >
           <div>
             <h2 className="mb-8 font-display text-[96px] uppercase leading-[0.9] tracking-[0.01em] text-white max-[900px]:mb-6 max-[900px]:text-[64px] max-[480px]:mb-5 max-[480px]:text-center max-[480px]:text-[44px]">
               WE BUILD WHAT
               <br />
               OTHERS{" "}
-              <em className="not-italic text-vos-cyan [text-shadow:0_0_40px_rgba(0,229,255,0.25)]">
+              <em className="not-italic text-vos-cyan [text-shadow:0_0_40px_rgb(var(--glow-cyan)/0.25)]">
                 WON&apos;T.
               </em>
             </h2>
@@ -123,8 +127,9 @@ export default function AboutSection({ stats }: { stats?: GithubOrgStats }) {
             </p>
             <div className="flex flex-wrap items-center gap-4 max-[480px]:flex-col max-[480px]:items-center">
               <Link
+                ref={browseRef}
                 href="/projects"
-                className="group/btn relative inline-flex h-12 items-center gap-2.5 overflow-hidden rounded-sm border border-white bg-white px-7 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-black transition-[transform,border-color] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:-translate-y-0.5 hover:border-vos-cyan max-[480px]:h-11 max-[480px]:w-full max-[480px]:justify-center max-[480px]:px-5 max-[480px]:text-[10px]"
+                className="group/btn relative inline-flex h-12 translate-x-[var(--mx,0)] translate-y-[var(--my,0)] items-center gap-2.5 overflow-hidden rounded-sm border border-white bg-white px-7 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-black transition-[translate,scale,border-color] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:border-vos-cyan active:scale-[0.98] max-[480px]:h-11 max-[480px]:w-full max-[480px]:justify-center max-[480px]:px-5 max-[480px]:text-[10px]"
               >
                 <span className="absolute inset-0 -translate-x-[101%] bg-vos-cyan transition-transform duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/btn:translate-x-0" />
                 <span className="relative z-[1]">BROWSE PROJECTS →</span>
@@ -140,9 +145,9 @@ export default function AboutSection({ stats }: { stats?: GithubOrgStats }) {
             </div>
           </div>
 
-          {/* terminal */}
-          <div className="overflow-hidden rounded-[10px] border border-white/[0.08] bg-vos-surface max-[900px]:max-w-[480px] max-[480px]:max-w-full">
-            <div className="flex items-center gap-[7px] border-b border-white/[0.06] bg-[#0c0c0c] px-4 py-3">
+          {/* terminal — types its rows out on reveal */}
+          <div className="overflow-hidden rounded-[10px] border border-white/[0.08] bg-vos-surface transition-[border-color,box-shadow] duration-300 hover:border-vos-cyan/25 hover:shadow-[0_0_50px_rgb(var(--glow-cyan)/0.05)] max-[900px]:max-w-[480px] max-[480px]:max-w-full">
+            <div className="flex items-center gap-[7px] border-b border-white/[0.06] bg-vos-panel-2 px-4 py-3">
               <span className="h-3 w-3 flex-shrink-0 rounded-full bg-vos-dot-red" />
               <span className="h-3 w-3 flex-shrink-0 rounded-full bg-vos-dot-amber" />
               <span className="h-3 w-3 flex-shrink-0 rounded-full bg-vos-dot-green" />
@@ -151,10 +156,10 @@ export default function AboutSection({ stats }: { stats?: GithubOrgStats }) {
               </span>
             </div>
             <div className="px-6 pb-5 pt-6 max-[480px]:px-4 max-[480px]:pb-3.5 max-[480px]:pt-4">
-              {termRows.map((r) => (
+              {termRows.map((r, i) => (
                 <div
                   key={r.key}
-                  className="flex items-center border-b border-white/[0.03] py-[5px] last-of-type:border-none"
+                  className={`flex items-center border-b border-white/[0.03] py-[5px] last-of-type:border-none ${i < printed ? "animate-[boot-line_0.3s_var(--ease-settle)_both]" : "opacity-0"}`}
                 >
                   <span className="min-w-[90px] font-mono text-[12px] text-white/30 max-[480px]:min-w-[70px] max-[480px]:text-[11px]">
                     {r.key}
@@ -176,7 +181,7 @@ export default function AboutSection({ stats }: { stats?: GithubOrgStats }) {
                   </span>
                 </div>
               ))}
-              <span className="mt-3 inline-block font-mono text-[14px] text-vos-green [text-shadow:0_0_8px_rgba(34,255,110,0.5)] animate-[blink_0.9s_step-end_infinite]">
+              <span className="mt-3 inline-block font-mono text-[14px] text-vos-green [text-shadow:0_0_8px_rgb(var(--glow-green)/0.5)] animate-[caret-blink_1.05s_step-end_infinite]">
                 ▮
               </span>
             </div>
@@ -186,7 +191,7 @@ export default function AboutSection({ stats }: { stats?: GithubOrgStats }) {
         {/* stats */}
         <div
           ref={statsRef}
-          className={`grid grid-cols-4 border-t border-white/[0.06] opacity-0 max-[900px]:grid-cols-2 ${inView ? "animate-[fade-up_0.7s_cubic-bezier(0.22,1,0.36,1)_0.4s_forwards]" : ""}`}
+          className={`grid grid-cols-4 border-t border-white/[0.06] opacity-0 max-[900px]:grid-cols-2 ${inView ? "animate-[fade-up_0.7s_var(--ease-settle)_0.4s_forwards]" : ""}`}
         >
           <StatCounter
             target={s.repos}
@@ -208,7 +213,7 @@ export default function AboutSection({ stats }: { stats?: GithubOrgStats }) {
           />
           <StatScramble label="Status" started={statsStarted} delay={450} />
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }

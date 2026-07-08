@@ -22,7 +22,7 @@ export default async function AccountPage() {
       <PageHeading title="Account" subtitle="Manage your admin credentials." />
 
       <div className="grid gap-6 lg:grid-cols-[320px_1fr]">
-        <Card className="h-fit">
+        <Card className="h-fit animate-[fade-up_0.5s_var(--ease-settle)_both]">
           <CardHeader>
             <CardTitle className="font-mono text-sm uppercase tracking-[0.12em]">
               Identity
@@ -54,7 +54,10 @@ export default async function AccountPage() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card
+          className="animate-[fade-up_0.5s_var(--ease-settle)_both]"
+          style={{ animationDelay: "80ms" }}
+        >
           <CardHeader>
             <CardTitle className="font-mono text-sm uppercase tracking-[0.12em]">
               Change password
