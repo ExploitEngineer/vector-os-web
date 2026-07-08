@@ -92,7 +92,7 @@ export default function BlogForm({
 
       <FormField
         label="Content (Markdown)"
-        hint="Supports GitHub-flavored Markdown."
+        hint="Supports GitHub-flavored Markdown. Fenced code blocks (```lang) are syntax-highlighted on the post page."
         error={fe.content}
       >
         <textarea

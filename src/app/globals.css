@@ -518,3 +518,53 @@
     );
   }
 }
+
+/* Syntax highlighting for fenced code blocks (rehype-highlight / highlight.js).
+   Token classes map onto the terminal palette — see the @theme --color-vos-* tokens.
+   No hardcoded hex here: colors resolve from those CSS variables. */
+.hljs {
+  color: rgba(255, 255, 255, 0.72);
+  background: transparent;
+}
+.hljs-comment,
+.hljs-quote,
+.hljs-meta {
+  color: var(--color-vos-muted);
+  font-style: italic;
+}
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-built_in,
+.hljs-name,
+.hljs-tag,
+.hljs-section {
+  color: var(--color-vos-cyan);
+}
+.hljs-string,
+.hljs-attribute,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition,
+.hljs-regexp {
+  color: var(--color-vos-green);
+}
+.hljs-number,
+.hljs-literal,
+.hljs-deletion {
+  color: var(--color-vos-red);
+}
+.hljs-title,
+.hljs-type,
+.hljs-class .hljs-title,
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-params {
+  color: var(--color-vos-amber);
+}
+.hljs-emphasis {
+  font-style: italic;
+}
+.hljs-strong {
+  font-weight: 600;
+}
